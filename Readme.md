@@ -1,0 +1,1 @@
+A jokingly mean response to a beginner friend's code project
