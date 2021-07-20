@@ -1,5 +1,6 @@
 import keyboard
 import time
+from MorseTranslator import MorseTranslator
 
 
 class MorseListener:
@@ -7,6 +8,8 @@ class MorseListener:
         self.done_flag = False
         keyboard.on_press_key("escape", lambda x: self.finish())
         self.morse_string = ""
+        self.english_string = ""
+        self.tl = MorseTranslator()
         print("Welcome to AT's better morse code python program. Get fucked Henry. \n"
               "This program follows the standardized morse code timings. \n"
               "source: http://www.nu-ware.com/NuCode%20Help/index.html?morse_code_structure_and_timing_.htm \n"
@@ -46,19 +49,18 @@ class MorseListener:
                 time.sleep(.1)
             t2 = time.time()
             dot_units = (t2 - t1) / self.dot_timing
-            print(dot_units)
             if dot_units < 2:
                 self.morse_string += "."
             else:
                 self.morse_string += "-"
-            print(self.morse_string + "\n")
+            self.english_string = self.tl.translate(self.morse_string)
+            print(self.morse_string + "\n"+ self.english_string)
 
             # secondary while loop for clean escape
             while not self.done_flag:
                 if keyboard.is_pressed("space") or keyboard.is_pressed("escape"):
                     t1 = time.time()
                     dot_units = (t1 - t2) / self.dot_timing
-                    print(dot_units)
                     if dot_units > 6:
                         self.morse_string += "/"
                     elif dot_units > 2:

@@ -10,13 +10,11 @@ class MorseTranslator:
                 continue
 
     def get_letter(self, morse):
-        print(morse)
         morse = morse.replace("-", "_")
-        print(morse)
         try:
             return self.source_dict[morse]
         except KeyError:
-            print("character not found")
+            return "{?}"
 
     def translate(self, string):
         result = ""
